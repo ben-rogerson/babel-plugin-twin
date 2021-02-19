@@ -1,0 +1,20 @@
+{
+  "name": "babel-plugin-twin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ben-rogerson/babel-plugin-twin.git"
+  },
+  "keywords": [],
+  "author": "Evgeny V <https://github.com/euvs> and Ben Rogerson <https://github.com/ben-rogerson>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ben-rogerson/babel-plugin-twin/issues"
+  },
+  "homepage": "https://github.com/ben-rogerson/babel-plugin-twin#readme",
+  "dependencies": {
+    "@babel/template": "^7.12.13"
+  }
+}
