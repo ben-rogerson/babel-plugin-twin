@@ -1,5 +1,9 @@
 # Babel plugin twin
 
+<a href="https://www.npmjs.com/package/babel-plugin-twin"><img src="https://img.shields.io/npm/dt/babel-plugin-twin.svg" alt="Total Downloads"></a>
+<a href="https://www.npmjs.com/package/babel-plugin-twin"><img src="https://img.shields.io/npm/v/babel-plugin-twin.svg" alt="Latest Release"></a>
+<a href="https://discord.gg/Xj6x9z7"><img src="https://img.shields.io/discord/705884695400939552?label=discord&logo=discord" alt="Discord"></a>
+
 This plugin activates [twin.macro](https://github.com/ben-rogerson/twin.macro)’s tw prop without you adding the twin import:
 
 ```diff
@@ -11,7 +15,7 @@ const Component = () => <div tw="block">
 ## Installation
 
 ```shell
-npm i -D babel-plugin twin
+npm i -D babel-plugin-twin
 # or
 yarn add babel-plugin-twin -D
 ```
