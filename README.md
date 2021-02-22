@@ -4,12 +4,12 @@
 <a href="https://www.npmjs.com/package/babel-plugin-twin"><img src="https://img.shields.io/npm/v/babel-plugin-twin.svg" alt="Latest Release"></a>
 <a href="https://discord.gg/Xj6x9z7"><img src="https://img.shields.io/discord/705884695400939552?label=discord&logo=discord" alt="Discord"></a>
 
-This plugin activates [twin.macro](https://github.com/ben-rogerson/twin.macro)’s tw prop without you adding the twin import:
+This plugin automatically adds the tw prop from [twin.macro](https://github.com/ben-rogerson/twin.macro) - no import required:
 
 ```diff
 - import "twin.macro"
 
-const Component = () => <div tw="block">
+const Component = () => <div tw="block" />
 ```
 
 ## Installation
