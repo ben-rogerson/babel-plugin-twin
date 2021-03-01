@@ -1,6 +1,6 @@
 # Babel plugin twin
 
-<a href="https://www.npmjs.com/package/babel-plugin-twin"><img src="https://img.shields.io/npm/dt/babel-plugin-twin.svg" alt="Total Downloads"></a>
+<a href="https://www.npmjs.com/package/babel-plugin-twin"><img src="htps://img.shields.io/npm/dt/babel-plugin-twin.svg" alt="Total Downloads"></a>
 <a href="https://www.npmjs.com/package/babel-plugin-twin"><img src="https://img.shields.io/npm/v/babel-plugin-twin.svg" alt="Latest Release"></a>
 <a href="https://discord.gg/Xj6x9z7"><img src="https://img.shields.io/discord/705884695400939552?label=discord&logo=discord" alt="Discord"></a>
 
@@ -10,6 +10,12 @@ This plugin automatically adds the tw prop from [twin.macro](https://github.com/
 - import "twin.macro"
 
 const Component = () => <div tw="block" />
+```
+
+You’ll also get the css prop from your css-in-js library:
+
+```diff
+const Component = () => <div css={`background-color: blue;`} />
 ```
 
 ## Installation
