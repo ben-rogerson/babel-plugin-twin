@@ -12,16 +12,21 @@ function importTwinMacroPlugin(babel) {
       Program: (path, state) => {
         let shouldAddImport = true;
         const hasDebug = state.opts.debug === true;
+        const exclude = state.opts.exclude ?? [];
+        
+        if (exclude.some(r => r.test(state.file.opts.filename))) {
+          shouldAddImport = false;
+        } else {
+          state.file.path.traverse({
+            ImportDeclaration(path) {
+              // Find the twin import path
+              if (path.node.source.value !== "twin.macro") return;
+              shouldAddImport = false;
+            },
 
-        state.file.path.traverse({
-          ImportDeclaration(path) {
-            // Find the twin import path
-            if (path.node.source.value !== "twin.macro") return;
-            shouldAddImport = false;
-          },
-
-          // TODO: Alert on usage of tw when no `import tw from "twin.macro"`
-        });
+            // TODO: Alert on usage of tw when no `import tw from "twin.macro"`
+          });
+        }
 
         if (!shouldAddImport) {
           hasDebug &&
