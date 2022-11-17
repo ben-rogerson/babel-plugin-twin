@@ -12,28 +12,37 @@ function importTwinMacroPlugin(babel) {
       Program: (path, state) => {
         let shouldAddImport = true;
         const hasDebug = state.opts.debug === true;
+        const matchedExclude = (state.opts.exclude ?? []).find((regex) =>
+          RegExp(regex).test(state.file.opts.filename)
+        );
 
-        state.file.path.traverse({
-          ImportDeclaration(path) {
-            // Find the twin import path
-            if (path.node.source.value !== "twin.macro") return;
-            shouldAddImport = false;
-          },
-
-          // TODO: Alert on usage of tw when no `import tw from "twin.macro"`
-        });
+        if (matchedExclude) {
+          shouldAddImport = false;
+          hasDebug &&
+            console.log(
+              `babel-plugin-twin: Matched exclude pattern “${matchedExclude}” on “${state.file.opts.filename}”`
+            );
+        } else {
+          state.file.path.traverse({
+            ImportDeclaration(path) {
+              // Find the twin import path
+              if (path.node.source.value !== "twin.macro") return;
+              shouldAddImport = false;
+            },
+          });
+        }
 
         if (!shouldAddImport) {
           hasDebug &&
             console.log(
-              `babel-plugin-twin: Skipped injection in “${state.file.opts.sourceFileName}”`
+              `babel-plugin-twin: Skipped injection in “${state.file.opts.filename}”`
             );
           return;
         }
 
         hasDebug &&
           console.log(
-            `babel-plugin-twin: Injected import in “${state.file.opts.sourceFileName}”`
+            `babel-plugin-twin: Injected import in “${state.file.opts.filename}”`
           );
 
         path.unshiftContainer("body", importDeclaration);
