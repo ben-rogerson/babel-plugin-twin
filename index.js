@@ -12,10 +12,16 @@ function importTwinMacroPlugin(babel) {
       Program: (path, state) => {
         let shouldAddImport = true;
         const hasDebug = state.opts.debug === true;
-        const exclude = state.opts.exclude ?? [];
-        
-        if (exclude.some(r => r.test(state.file.opts.filename))) {
+        const matchedExclude = (state.opts.exclude ?? []).find((regex) =>
+          RegExp(regex).test(state.file.opts.filename)
+        );
+
+        if (matchedExclude) {
           shouldAddImport = false;
+          hasDebug &&
+            console.log(
+              `babel-plugin-twin: Matched exclude pattern “${matchedExclude}” on “${state.file.opts.filename}”`
+            );
         } else {
           state.file.path.traverse({
             ImportDeclaration(path) {
@@ -23,22 +29,20 @@ function importTwinMacroPlugin(babel) {
               if (path.node.source.value !== "twin.macro") return;
               shouldAddImport = false;
             },
-
-            // TODO: Alert on usage of tw when no `import tw from "twin.macro"`
           });
         }
 
         if (!shouldAddImport) {
           hasDebug &&
             console.log(
-              `babel-plugin-twin: Skipped injection in “${state.file.opts.sourceFileName}”`
+              `babel-plugin-twin: Skipped injection in “${state.file.opts.filename}”`
             );
           return;
         }
 
         hasDebug &&
           console.log(
-            `babel-plugin-twin: Injected import in “${state.file.opts.sourceFileName}”`
+            `babel-plugin-twin: Injected import in “${state.file.opts.filename}”`
           );
 
         path.unshiftContainer("body", importDeclaration);
