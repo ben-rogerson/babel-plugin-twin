@@ -54,6 +54,23 @@ module.exports = {
 };
 ```
 
+To avoid checking files or folders, supply `exclude` with an array of regex patterns:
+
+```js
+module.exports = {
+  plugins: [
+    ["babel-plugin-twin", {
+      "exclude": [
+        "temp/",
+        "..."
+      ]
+    },
+    "babel-plugin-macros",
+    // ...
+  ],
+};
+```
+
 ## Special thanks
 
 A big shoutout goes to [@euvs](https://github.com/euvs) for the plugin concept + code and [@mxsbr](https://github.com/mxstbr) for planting [the idea](https://github.com/ben-rogerson/twin.macro/issues/247).
